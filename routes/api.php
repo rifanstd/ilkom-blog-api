@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Category
+Route::apiResource('/category', CategoryController::class)->except([
+    'show',
+    'destroy',
+    'update',
+]);
+Route::get('/category/{category:slug}', [CategoryController::class, 'show']);
+Route::put('/category/{category:slug}', [CategoryController::class, 'update']);
+Route::delete('/category/{category:slug}', [CategoryController::class, 'destroy']);
