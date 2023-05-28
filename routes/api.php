@@ -21,6 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Category
 Route::apiResource('/category', CategoryController::class)->except([
-    'show'
+    'show',
+    'destroy',
+    'update',
 ]);
 Route::get('/category/{category:slug}', [CategoryController::class, 'show']);
+Route::put('/category/{category:slug}', [CategoryController::class, 'update']);
+Route::delete('/category/{category:slug}', [CategoryController::class, 'destroy']);
