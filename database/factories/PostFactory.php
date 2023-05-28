@@ -22,7 +22,7 @@ class PostFactory extends Factory
 
         return [
             'category_id' => fake()->numberBetween(1, 10),
-            'author_id' => fake()->numberBetween(1, 10),
+            'user_id' => fake()->numberBetween(1, 10),
             'title' => $title,
             'slug' => $slug,
             'body' => fake()->paragraph(nbSentences: 10),

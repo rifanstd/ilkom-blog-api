@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Post::with('category')->latest()->get());
+        return PostResource::collection(Post::with(['category', 'user'])->latest()->get());
     }
 
     /**
