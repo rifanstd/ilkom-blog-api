@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,11 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => 'required',
+            'author_id' => 'required',
+            'title' => 'required|min:2|max:100|' . Rule::unique('posts')->ignore($this->post),
+            'slug' => 'required|min:2|max:100|' . Rule::unique('posts')->ignore($this->post),
+            'body' => 'required|min:5',
         ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,21 @@ Route::apiResource('/category', CategoryController::class)->except([
     'destroy',
     'update',
 ]);
-Route::get('/category/{category:slug}', [CategoryController::class, 'show']);
-Route::put('/category/{category:slug}', [CategoryController::class, 'update']);
-Route::delete('/category/{category:slug}', [CategoryController::class, 'destroy']);
+Route::prefix('/category')->group(function () {
+    Route::get('/{category:slug}', [CategoryController::class, 'show']);
+    Route::put('/{category:slug}', [CategoryController::class, 'update']);
+    Route::delete('/{category:slug}', [CategoryController::class, 'destroy']);
+});
+// 
+
+// Post
+Route::apiResource('/post', PostController::class)->except([
+    'show',
+    'destroy',
+    'update',
+]);
+Route::prefix('/post')->group(function () {
+    Route::get('/{post:slug}', [PostController::class, 'show']);
+    Route::put('/{post:slug}', [PostController::class, 'update']);
+    Route::delete('/{post:slug}', [PostController::class, 'destroy']);
+});

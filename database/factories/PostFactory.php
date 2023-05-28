@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -16,8 +17,15 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $title = ucwords(fake()->sentence(nbWords: 5));
+        $slug = Str::of($title)->slug('-');
+
         return [
-            //
+            'category_id' => fake()->numberBetween(1, 10),
+            'author_id' => fake()->numberBetween(1, 10),
+            'title' => $title,
+            'slug' => $slug,
+            'body' => fake()->paragraph(nbSentences: 10),
         ];
     }
 }
