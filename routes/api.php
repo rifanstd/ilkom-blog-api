@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +45,6 @@ Route::prefix('/post')->group(function () {
     Route::put('/{post:slug}', [PostController::class, 'update']);
     Route::delete('/{post:slug}', [PostController::class, 'destroy']);
 });
+
+// User
+Route::apiResource('/user', UserController::class);
